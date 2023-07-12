@@ -8,7 +8,7 @@ var lastKeyPressed = 0;
 document.addEventListener("keydown", function() {
     lastKeyPressed = event.keyCode;
     console.log(lastKeyPressed);
-    if (cat.style.visibility === "hidden") {
+    if (cat.style.visibility === "hidden") { // verify that cat is gone
         if (event.key === 'p' || event.key === 's') {
             pspsps.push(event.key);
         }
@@ -43,7 +43,6 @@ function topFunction() {
 function getNewPos() {
     let multiply = Math.floor(Math.random() * 1000) + 1;
     feedButton.style.bottom = Math.floor(Math.random() * multiply) + 'px';
-    feedButton.style.left = Math.floor(Math.random() * multiply) + 'px';
     feedButton.style.right = Math.floor(Math.random() * multiply) + 'px';
     feedButton.style.transition = '0.2s';
 }

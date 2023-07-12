@@ -58,6 +58,13 @@ p {
     list-style-position: outside;
 }
 
+#feed {
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 #scroll {
   display: none;
   position: fixed;
@@ -76,4 +83,15 @@ p {
 
 #scroll:hover {
   background-color: #555;
+}
+
+#videos2:feed {
+    z-index: 99;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#videos2:cat {
+    visibility: visible;
 }

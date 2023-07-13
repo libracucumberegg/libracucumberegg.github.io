@@ -1,11 +1,14 @@
-let button;
+var button;
 let feedButton = document.getElementById('feed');
 let cat = document.getElementById('cat');
+let text = document.getElementById('text');
+let treat = document.getElementById('treat');
 let pspsps = [];
 
 var lastKeyPressed = 0;
-
 var moves = 0;
+
+let i = 0;
 
 onDOMContentLoaded = (event) => {
     button = document.getElementById("scroll");
@@ -49,12 +52,9 @@ function scrollToTop() {
 function getNewPos() {
     moves++;
     let multiply = Math.floor(Math.random() * 1000) + 1;
-    if (moves >= 25) { // start pity at 25
-        console.log('pity ' + moves);
-        let divisor = (multiply / moves) / 10;
-        console.log(divisor); // log to make sure it doesn't drop too fast
-        multiply /= divisor;
-        multiply = Math.max(multiply, 1);
+    if (moves >= 40) { // start pity at 40
+        multiply -= moves * 2;
+        multiply = Math.max(multiply, 10);
     }
     feedButton.style.bottom = Math.floor(Math.random() * multiply) + 'px';
     feedButton.style.left = Math.floor(Math.random() * multiply) + 'px';
@@ -71,6 +71,13 @@ function clickFeed() {
     setTimeout(function() {
         alert('You got the treats! Unfortunately, my cat appears to be a little too lazy to get the treats right now and is hiding. Please find her.')
     }, 500);
+    giveTreat();
+}
+
+function giveTreat() {
+    treat.style.visibility = 'visible';
+    treat.style.bottom = 25;
+    treat.style.right = 25;
 }
 
 function reset() {
@@ -78,6 +85,7 @@ function reset() {
     feedButton.style.bottom = 0;
     feedButton.style.left = 0;
     feedButton.style.right = 0;
+    moves = 0;
     setTimeout(function() {
         alert('You found my cat! Now she can eat all the treats! Mind getting them for me?');
     }, 500);

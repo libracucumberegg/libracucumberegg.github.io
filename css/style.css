@@ -47,8 +47,7 @@ p {
     background-color: #00A4BD;
 }
 
-.videos,
-.videos2 {
+.videos, .videos2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,13 +81,6 @@ p {
 
 #scroll:hover {
   background-color: #555;
-}
-
-#videos2:feed {
-    z-index: 99;
-    position: relative;
-    top: 0;
-    left: 0;
 }
 
 #videos2:cat {

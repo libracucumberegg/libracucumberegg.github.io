@@ -23,7 +23,7 @@ h1, p {
 
 @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: orange; }
+    50% { border-color: lightblue; }
 }
 
 .wrap {
@@ -85,8 +85,6 @@ h1, p {
     bottom: 20px;
     right: 30px;
     z-index: 98;
-    border: none;
-    outline: none;
     background-color: blue;
     color: white;
     cursor: pointer;
@@ -97,4 +95,14 @@ h1, p {
 
 #scroll:hover {
     background-color: #555;
+}
+
+#treat {
+    position: relative;
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    color: #fff;
+    right: 0;
+    bottom: 0;
 }

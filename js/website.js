@@ -5,8 +5,9 @@ let text = document.getElementById('text');
 let treat = document.getElementById('treat');
 let pspsps = [];
 
-var lastKeyPressed = 0;
-var moves = 0;
+let lastKeyPressed = 0;
+let lastTimePressed = 0;
+let moves = 0;
 
 let i = 0;
 
@@ -17,6 +18,7 @@ onDOMContentLoaded = (event) => {
 
 document.addEventListener("keydown", function() {
     lastKeyPressed = event.keyCode;
+    lastTimePressed = Date.now();
     if (cat.style.visibility === "hidden") { // verify that cat is gone
         if (event.key === 'p' || event.key === 's') {
             pspsps.push(event.key);
@@ -30,11 +32,7 @@ document.addEventListener("keydown", function() {
     }
 });
 
-document.onscroll = function() {scroll()};
-feedButton.onmouseover = function() {getNewPos()};
-feedButton.onclick = function() {clickFeed()};
-
-function scroll() {
+document.onscroll = function() {
     if (button != null) {
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
             button.style.display = "block";
@@ -42,7 +40,10 @@ function scroll() {
             button.style.display = "none";
         }
     }
-}
+};
+
+feedButton.onmouseover = function() {getNewPos()};
+feedButton.onclick = function() {clickFeed()};
 
 function scrollToTop() {
     document.body.scrollTop = 0; // For Safari
@@ -63,7 +64,7 @@ function getNewPos() {
 }
 
 function clickFeed() {
-    if (lastKeyPressed === 13) { // enter key
+    if (lastKeyPressed === 13 && Date.now() - lastTimePressed < 500) { // 13 = enter key
         alert('Oh no! My cat got bored waiting for you to press tab to get to the button and she never got the treats!');
         return;
     }
@@ -76,8 +77,8 @@ function clickFeed() {
 
 function giveTreat() {
     treat.style.visibility = 'visible';
-    treat.style.bottom = 25;
-    treat.style.right = 25;
+    treat.style.bottom = 0;
+    treat.style.right = 0;
 }
 
 function reset() {

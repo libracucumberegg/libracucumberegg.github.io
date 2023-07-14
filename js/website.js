@@ -1,44 +1,31 @@
-var button;
 let feedButton = document.getElementById('feed');
 let cat = document.getElementById('cat');
-let text = document.getElementById('text');
-let treat = document.getElementById('treat');
 let pspsps = [];
 
 let lastKeyPressed = 0;
 let lastTimePressed = 0;
 let moves = 0;
 
-let i = 0;
-
-onDOMContentLoaded = (event) => {
-    button = document.getElementById("scroll");
-    button.onclick = function() {scrollToTop()};
-};
-
 document.addEventListener("keydown", function() {
     lastKeyPressed = event.keyCode;
     lastTimePressed = Date.now();
     if (cat.style.visibility === "hidden") { // verify that cat is gone
-        if (event.key === 'p' || event.key === 's') {
-            pspsps.push(event.key);
-        }
-        if (pspsps.length === 8) {
-            if (pspsps.toString().replaceAll(",", "") === 'pspspsps') { // toString() keeps commas so we have to get rid of them
+        pspsps.push(event.key);
+        if (pspsps.length >= 8) {
+            if (pspsps.slice(-8).toString().replaceAll(",", "") === 'pspspsps') { // toString() keeps commas so we have to get rid of them
                 reset();
+                pspsps = [];
             }
-            pspsps = [];
         }
     }
 });
 
 document.onscroll = function() {
-    if (button != null) {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            button.style.display = "block";
-        } else {
-            button.style.display = "none";
-        }
+    let button = document.getElementById("scroll") // errors if initialized outside?
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
     }
 };
 
@@ -52,7 +39,7 @@ function scrollToTop() {
 
 function getNewPos() {
     moves++;
-    let multiply = Math.floor(Math.random() * 1000) + 1;
+    let multiply = Math.floor(Math.random() * 1000) + 1; // add 1 to prevent multiplying by 0 which isn't good
     if (moves >= 40) { // start pity at 40
         multiply -= moves * 2;
         multiply = Math.max(multiply, 10);
@@ -72,20 +59,13 @@ function clickFeed() {
     setTimeout(function() {
         alert('You got the treats! Unfortunately, my cat appears to be a little too lazy to get the treats right now and is hiding. Please find her.')
     }, 500);
-    giveTreat();
-}
-
-function giveTreat() {
-    treat.style.visibility = 'visible';
-    treat.style.bottom = 0;
-    treat.style.right = 0;
 }
 
 function reset() {
     cat.style.visibility = 'visible';
-    feedButton.style.bottom = 0;
-    feedButton.style.left = 0;
-    feedButton.style.right = 0;
+    feedButton.style.bottom = '0';
+    feedButton.style.left = '0';
+    feedButton.style.right = '0';
     moves = 0;
     setTimeout(function() {
         alert('You found my cat! Now she can eat all the treats! Mind getting them for me?');

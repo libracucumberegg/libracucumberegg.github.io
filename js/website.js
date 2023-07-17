@@ -41,7 +41,7 @@ function getNewPos() {
     moves++;
     let multiply = Math.floor(Math.random() * 1000) + 1; // add 1 to prevent multiplying by 0 which isn't good
     if (moves >= 40) { // start pity at 40
-        multiply -= moves * 2;
+        multiply -= moves * 3;
         multiply = Math.max(multiply, 10);
     }
     feedButton.style.bottom = Math.floor(Math.random() * multiply) + 'px';

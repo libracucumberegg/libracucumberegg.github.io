@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-h1 {
+h1, h5 {
     color: #008080;
     font-weight: normal;
     text-align: center;
@@ -15,14 +15,14 @@ p {
     text-align: center;
 }
 
-.intro p {
+.article p {
     overflow: hidden;
     border-right: .15em solid orange;
     white-space: pre;
     margin: 0 auto;
     animation:
-        typing 3.5s steps(40, end),
-        blink-caret .75s step-end infinite;
+            typing 3.5s steps(40, end),
+            blink-caret .75s step-end infinite;
 }
 
 @keyframes typing {
@@ -33,17 +33,6 @@ p {
 @keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: #f0f0f0; }
-}
-
-.section {
-    padding: 20em 0;
-}
-
-.wrap {
-    top: 0;
-    left: 0;
-    height: auto;
-    width: 100%;
 }
 
 .dropdown {
@@ -77,23 +66,36 @@ p {
     background-color: #008080;
 }
 
-.videos, .videos2 {
+.videos {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .bullets {
+    padding: 0;
+    text-align: center;
     list-style-position: outside;
 }
 
-#feed {
+.site-button {
     position: relative;
     right: 0;
-    bottom: 0;
+    background-color: rgb(158,9,2);
 }
 
-#scroll {
+.iframe-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.iframe-img-container > * {
+    margin: 10px;
+}
+
+.top-scroll-btn {
     display: none;
     position: fixed;
     bottom: 20px;
@@ -107,6 +109,10 @@ p {
     font-size: 24px;
 }
 
-#scroll:hover {
+.top-scroll-btn:hover {
     background-color: #005858;
+}
+
+footer p {
+    text-align: center;
 }

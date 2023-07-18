@@ -10,80 +10,66 @@
 </head>
 
 <body>
-    <section>
-        <div class="dropdown">
-            <button>Jump to</button>
-            <div class="dropdown-content">
-                <a href="#intro">Introduction</a>
-                <a href="#projects">Current Projects</a>
-                <a href="#hobbies">Hobbies</a>
-            </div>
+<header>
+    <nav class="dropdown">
+        <button>Jump to</button>
+        <div class="dropdown-content">
+            <a href="#intro">Introduction</a>
+            <a href="#projects">Current Projects</a>
+            <a href="#hobbies">Hobbies</a>
         </div>
+    </nav>
+</header>
+
+<main>
+    <section id="intro">
+        <h1>Introduction</h1>
+
+        <p>Hello! I am your average 19-year-old developer with some experience in HTML, CSS, Bootstrap 4, and Java. I have a project I'm currently working on which is a Minecraft cheat client designed to avoid detection by many different Minecraft anticheats available today. Feel free to look around at my current and past projects.</p>
     </section>
 
-    <section>
-        <div class="intro">
-            <h1 id="intro">Introduction</h1>
-
-            <p>Hello! I am your average 19-year-old developer with some experience in HTML, CSS, Bootstrap 4, and Java. I have a</p>
-            <p>project I'm currently working on which is a Minecraft cheat client designed to avoid detection by many different</p>
-            <p>Minecraft anticheats available today. Feel free to look around at my current and past projects.</p>
-        </div>
-    </section>
-
-    <section>
-        <h1 id="projects">Current Projects</h1>
+    <section id="projects">
+        <h1>Current Projects</h1>
 
         <div class="videos">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/JK71wMilMU8" title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    loading="lazy" allowfullscreen></iframe>
 
             <iframe width="560" height="315" src="https://www.youtube.com/embed/Qf75YQD9RGo" title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    loading="lazy" allowfullscreen></iframe>
         </div>
 
-        <div>
-            <h5 style="text-align: center"><a href="https://github.com/libracucumberegg">Click to view some of my old
-            projects</a></h5>
-        </div>
+        <h5><a class="old-projects-link" href="https://github.com/libracucumberegg">Click to view some of my old projects</a></h5>
     </section>
 
-    <section>
-        <div>
-            <h1 id="hobbies">Hobbies</h1>
+    <section id="hobbies">
+        <h1>Hobbies</h1>
 
-            <p>Many people have normal hobbies like going out for a walk or maybe wood working. However, my hobbies
-                include:</p>
-            <div class="bullets">
-                <p>&bullet; Learning the ins and outs of Minecraft related anticheats and making one myself <br>
-                    &bullet; Looking at statistics <br>
-                    &bullet; Finding out where my cats hid from me this time</p>
-            </div>
+        <ul class="bullets">
+            <li>&bullet; Learning the ins and outs of Minecraft related anticheats and making one myself</li>
+            <li>&bullet; Looking at statistics</li>
+            <li>&bullet; Finding out where my cats hid from me this time</li>
+        </ul>
 
-            <div class="videos2">
-                <button id='feed' style="background-color: rgb(158,9,2);">Give her treats!</button>
-                <figure>
-                    <img id="cat" src="images/cat.jpg" width="560" height="295" alt="cat">
-                </figure>
+        <div class="iframe-img-container">
+            <button id='feed' class='site-button'>Give her treats!</button>
+            <img id="cat" src="images/cat.jpg" width="560" height="310" alt="cat" loading="lazy">
 
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/bwdRGucBWIA"
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/bwdRGucBWIA"
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-            </div>
+                    loading="lazy" allowfullscreen></iframe>
         </div>
     </section>
-
-    <script src="js/website.js"></script>
-</body>
+</main>
 
 <footer>
-    <div style="text-align:center">
-        <button onclick="scrollToTop()" id="scroll" title="Go to top">Scroll to top ↑</button>
-    </div>
+    <button onclick="scrollToTop()" id="scroll" title="Go to top" class="top-scroll-btn">Scroll to top ↑</button>
     <p>libracucumberegg.github.io &nbsp;|&nbsp; &copy; 2023</p>
 </footer>
 
+<script src="js/website.js"></script>
+</body>
 </html>

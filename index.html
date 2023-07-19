@@ -11,13 +11,12 @@
 
 <body>
 <header>
-    <nav class="dropdown">
-        <button>Jump to</button>
-        <div class="dropdown-content">
-            <a href="#intro">Introduction</a>
-            <a href="#projects">Current Projects</a>
-            <a href="#hobbies">Hobbies</a>
-        </div>
+    <nav class="tabs">
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#projects">Current Projects</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+        </ul>
     </nav>
 </header>
 
@@ -53,14 +52,16 @@
             <li>&bullet; Finding out where my cats hid from me this time</li>
         </ul>
 
-        <div class="iframe-img-container">
-            <button id='feed' class='site-button'>Give her treats!</button>
-            <img id="cat" src="images/cat.jpg" width="560" height="310" alt="cat" loading="lazy">
+        <div class="content-container">
+            <div class="iframe-img-container">
+                <img id="cat" src="images/cat.jpg" width="560" height="310" alt="cat" loading="lazy">
 
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/bwdRGucBWIA"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    loading="lazy" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/bwdRGucBWIA"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy" allowfullscreen></iframe>
+            </div>
+            <button id='feed' style="left: 300px" class='site-button'>Give her treats!</button>
         </div>
     </section>
 </main>

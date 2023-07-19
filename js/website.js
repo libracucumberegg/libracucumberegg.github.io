@@ -2,12 +2,14 @@ const feedButton = document.getElementById('feed');
 const cat = document.getElementById('cat');
 let pspsps = [];
 
+let scrolling = false;
+
 let lastKeyPressed = 0;
 let lastTimePressed = 0;
 let moves = 0;
 
 document.addEventListener("keydown", event => {
-    lastKeyPressed = event.keyCode;
+    lastKeyPressed = event.code;
     lastTimePressed = Date.now();
     if (cat.style.visibility === "hidden") { // verify that cat is gone
         pspsps.push(event.key);
@@ -20,14 +22,48 @@ document.addEventListener("keydown", event => {
     }
 });
 
-window.addEventListener('scroll', event => {
+window.addEventListener('scroll', () => {
     const button = document.getElementById("scroll")
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         button.style.display = "block";
+        button.classList.add('translucent');
+        button.classList.remove('opaque');
     } else {
+        let generated = generateColour();
+        button.style.backgroundColor = generated;
+        button.style.color = getContrastColor(generated);
         button.style.display = "none";
     }
+    scrolling = true;
 });
+
+const links = document.querySelectorAll("nav.tabs ul li a");
+
+links.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        links.forEach(function(tabLink) {
+            tabLink.parentElement.classList.remove("active");
+        });
+
+        this.parentElement.classList.add("active");
+
+        // Manually add smooth scrolling
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+setInterval(function() {
+    const button = document.getElementById("scroll")
+    if (scrolling) {
+        scrolling = false;
+        button.classList.add('opaque');
+        button.classList.remove('translucent');
+    }
+}, 50);
 
 feedButton.onmouseover = getNewPos;
 feedButton.onclick = clickFeed;
@@ -48,6 +84,30 @@ function getNewPos() {
     feedButton.style.left = `${Math.floor(Math.random() * multiply)}px`;
     feedButton.style.right = `${Math.floor(Math.random() * multiply)}px`;
     feedButton.style.transition = '0.15s';
+}
+
+function generateColour() {
+    let color = "#";
+    for (let i = 0; i < 3; i++) { // gets rgb values in order when looping
+        const part = Math.floor((Math.random() * 195) + 30).toString(16);
+        color += part.length === 1 ? "0" + part : part;  // Ensures two digits
+    }
+    return color;
+}
+
+function getContrastColor(hexColor) {
+    let r = parseInt(hexColor.substring(1, 3), 16);
+    let g = parseInt(hexColor.substring(3, 5), 16);
+    let b = parseInt(hexColor.substring(5, 7), 16);
+
+    // Calculate the perceptive luminance - a measure of the luminous intensity perceived by the human eye.
+    let lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    if (lum > 0.5) {
+        return "#000000"; // Bright colors - dark font
+    } else {
+        return "#FFFFFF"; // Dark colors - bright font
+    }
 }
 
 function clickFeed() {

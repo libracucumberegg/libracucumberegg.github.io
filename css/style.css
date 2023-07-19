@@ -1,11 +1,11 @@
 body {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #282828;
+    color: #fff;
     font-family: Arial, sans-serif;
 }
 
 h1, h5 {
-    color: #008080;
+    color: #fff;
     font-weight: normal;
     text-align: center;
 }
@@ -15,73 +15,78 @@ p {
     text-align: center;
 }
 
+.opaque {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.translucent {
+    opacity: 0.5;
+    transition: opacity 0.5s;
+}
+
 .article p {
     overflow: hidden;
-    border-right: .15em solid orange;
     white-space: pre;
     margin: 0 auto;
-    animation:
-            typing 3.5s steps(40, end),
-            blink-caret .75s step-end infinite;
 }
 
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+main {
+    padding-top: 60px;
 }
 
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #f0f0f0; }
+nav.tabs {
+    width: 100%;
+    height: 50%;
+    position: fixed;
+    top: 0;
 }
 
-.dropdown {
-    display: inline-block;
-    position: relative;
+nav.tabs ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    width: 200%;
-    overflow: auto;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+nav.tabs ul li {
+    flex: 2;
+    float: left;
+    transition: background-color 0.4s ease;
 }
 
-.dropdown:hover .dropdown-content {
-    background-color: lightblue;
+nav.tabs ul li a {
     display: block;
-}
-
-.dropdown-content a {
-    display: block;
-    color: #111;
-    padding: 10px 15px;
-    transition: background .2s ease, color .2s ease;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
     text-decoration: none;
 }
 
-.dropdown-content a:hover {
-    color: #fff;
-    background-color: #008080;
+nav.tabs ul li a:hover {
+    background-color: #111;
 }
 
 .videos {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
 }
 
 .bullets {
     padding: 0;
     text-align: center;
     list-style-position: outside;
+    color: #ffffff;
 }
 
 .site-button {
     position: relative;
     right: 0;
-    background-color: rgb(158,9,2);
+    background-color: rgb(255, 78, 75);
 }
 
 .iframe-img-container {

@@ -31,7 +31,7 @@ window.addEventListener('scroll', () => {
     } else {
         let generated = generateColour();
         button.style.backgroundColor = generated;
-        button.style.color = getContrastColor(generated);
+        button.style.color = getContrastColour(generated);
         button.style.display = "none";
     }
     scrolling = true;
@@ -68,9 +68,28 @@ setInterval(function() {
 feedButton.onmouseover = getNewPos;
 feedButton.onclick = clickFeed;
 
-function scrollToTop() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For not Safari
+function generateColour() {
+    let color = "#";
+    for (let i = 0; i < 3; i++) { // gets rgb values in order when looping
+        const part = Math.floor((Math.random() * 195) + 30).toString(16); // number will never go lower than 30 or higher than 225 to prevent too bright or dark colours
+        color += part.length === 1 ? "0" + part : part;  // Ensures two digits
+    }
+    return color;
+}
+
+function getContrastColour(hexColour) {
+    let r = parseInt(hexColour.substring(1, 3), 16);
+    let g = parseInt(hexColour.substring(3, 5), 16);
+    let b = parseInt(hexColour.substring(5, 7), 16);
+
+    // Calculate the perceptive luminance - a measure of the luminous intensity perceived by the human eye.
+    let lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    if (lum > 0.5) {
+        return "#000000"; // Bright colors - dark font
+    } else {
+        return "#FFFFFF"; // Dark colors - bright font
+    }
 }
 
 function getNewPos() {
@@ -83,31 +102,7 @@ function getNewPos() {
     feedButton.style.bottom = `${Math.floor(Math.random() * multiply)}px`;
     feedButton.style.left = `${Math.floor(Math.random() * multiply)}px`;
     feedButton.style.right = `${Math.floor(Math.random() * multiply)}px`;
-    feedButton.style.transition = '0.15s';
-}
-
-function generateColour() {
-    let color = "#";
-    for (let i = 0; i < 3; i++) { // gets rgb values in order when looping
-        const part = Math.floor((Math.random() * 195) + 30).toString(16);
-        color += part.length === 1 ? "0" + part : part;  // Ensures two digits
-    }
-    return color;
-}
-
-function getContrastColor(hexColor) {
-    let r = parseInt(hexColor.substring(1, 3), 16);
-    let g = parseInt(hexColor.substring(3, 5), 16);
-    let b = parseInt(hexColor.substring(5, 7), 16);
-
-    // Calculate the perceptive luminance - a measure of the luminous intensity perceived by the human eye.
-    let lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-
-    if (lum > 0.5) {
-        return "#000000"; // Bright colors - dark font
-    } else {
-        return "#FFFFFF"; // Dark colors - bright font
-    }
+    feedButton.style.transition = '0.15s'; // smooth the transition to let the user see where the button runs off to
 }
 
 function clickFeed() {
@@ -130,4 +125,9 @@ function reset() {
     setTimeout(() => {
         alert('You found my cat! Now she can eat all the treats! Mind getting them for me?');
     }, 500);
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For not Safari
 }

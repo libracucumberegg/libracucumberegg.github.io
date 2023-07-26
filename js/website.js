@@ -119,7 +119,7 @@ function clickFeed() {
 function reset() {
     cat.style.visibility = 'visible';
     feedButton.style.bottom = '0';
-    feedButton.style.left = '0';
+    feedButton.style.left = '300px';
     feedButton.style.right = '0';
     moves = 0;
     setTimeout(() => {

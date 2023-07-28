@@ -1,5 +1,6 @@
 const feedButton = document.getElementById('feed');
 const cat = document.getElementById('cat');
+const errorMessage = document.getElementById('error');
 let pspsps = [];
 
 let scrolling = false;
@@ -7,6 +8,28 @@ let scrolling = false;
 let lastKeyPressed = 0;
 let lastTimePressed = 0;
 let moves = 0;
+
+function login() {
+    const inputUser = document.getElementById('username').value;
+    const inputPass = document.getElementById('password').value;
+    if (btoa(inputUser) === 'cm9vdA==' && btoa(inputPass) === 'cGFzc3dvcmQ=') {
+        errorMessage.style.display = 'none';
+        document.getElementById('login-form').style.display = 'none';
+        const hiddenContent = document.getElementById('hidden-content');
+        hiddenContent.style.display = 'block';
+        // Force a reflow (flush of the CSS cache),
+        // necessary for the transition to work
+        hiddenContent.getBoundingClientRect();
+        hiddenContent.classList.add('visible');
+    } else {
+        errorMessage.innerText = "Invalid Username or Password!";
+        errorMessage.style.display = 'block';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    scrollToTop();
+});
 
 document.addEventListener("keydown", event => {
     lastKeyPressed = event.code;

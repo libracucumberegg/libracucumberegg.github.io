@@ -22,6 +22,13 @@ function login() {
         hiddenContent.getBoundingClientRect();
         hiddenContent.classList.add('visible');
     } else {
+        let currentTimeMillis = Date.now().toString();
+        let key = encrypt(currentTimeMillis.substring(0, 6));
+        if (btoa(inputUser) === 'YWRtaW4=' && inputPass === key) {
+            errorMessage.innerText = "Nice you cracked the password";
+            errorMessage.style.display = 'block';
+            return;
+        }
         errorMessage.innerText = "Invalid Username or Password!";
         errorMessage.style.display = 'block';
     }
@@ -153,4 +160,56 @@ function reset() {
 function scrollToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For not Safari
+}
+
+function encrypt(text) {
+    let calc = 18;
+
+    let s = '', s1 = '', s2 = '', s3 = '', s4 = '';
+
+    function mapToAlphanumeric(charCode) {
+        return charCode % 62 + 48;
+    }
+
+    for (let c of text) {
+        let charCode = c.charCodeAt(0) + calc - 8;
+        charCode -= calc / 3;
+        charCode -= calc - 5;
+        charCode = mapToAlphanumeric(charCode);
+        s += String.fromCharCode(charCode);
+    }
+
+    for (let c of s) {
+        let charCode = c.charCodeAt(0) + calc + 2;
+        charCode += calc;
+        charCode -= calc - 4;
+        charCode = mapToAlphanumeric(charCode);
+        s1 += String.fromCharCode(charCode);
+    }
+
+    for (let c of s1) {
+        let charCode = c.charCodeAt(0) + calc - 8;
+        charCode -= calc + 16;
+        charCode += calc;
+        charCode = mapToAlphanumeric(charCode);
+        s2 += String.fromCharCode(charCode);
+    }
+
+    for (let c of s2) {
+        let charCode = c.charCodeAt(0) + calc - 1;
+        charCode -= calc * 6;
+        charCode += calc;
+        charCode = mapToAlphanumeric(charCode);
+        s3 += String.fromCharCode(charCode);
+    }
+
+    for (let c of s3) {
+        let charCode = c.charCodeAt(0) + calc / 3;
+        charCode -= calc * 2;
+        charCode += calc;
+        charCode = mapToAlphanumeric(charCode);
+        s4 += String.fromCharCode(charCode);
+    }
+
+    return s4;
 }

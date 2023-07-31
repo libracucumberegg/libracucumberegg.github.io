@@ -213,3 +213,19 @@ function encrypt(text) {
 
     return s4;
 }
+
+let lightbox = document.getElementById('lightbox');
+let iframe = document.getElementById('content-box');
+
+document.querySelectorAll('a[data-lightbox]').forEach(item => {
+    item.addEventListener('click', event => {
+        event.preventDefault();
+        iframe.src = item.href;
+        lightbox.style.display = 'block';
+    })
+});
+
+document.getElementById('lightbox-close').addEventListener('click', () => {
+    lightbox.style.display = 'none';
+    iframe.src = ""; // fix browser still playing after closing
+});

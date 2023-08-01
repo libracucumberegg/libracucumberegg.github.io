@@ -212,3 +212,12 @@ input[type="text"], input[type="password"] {
     font-weight: bold;
     cursor: pointer;
 }
+
+#hidden-content {
+    transition: opacity 2s;
+    opacity: 0;
+}
+
+.shown {
+    opacity: 1 !important;
+}

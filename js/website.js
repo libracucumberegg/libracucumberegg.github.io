@@ -15,6 +15,7 @@ function login() {
     if (btoa(inputUser) === 'cm9vdA==' && btoa(inputPass) === 'cGFzc3dvcmQ=') {
         errorMessage.style.display = 'none';
         document.getElementById('login-form').classList.remove('shown');
+
         setTimeout(function () {
             document.getElementById('login-form').style.display = 'none';
             const hiddenContent = document.getElementById('hidden-content');
@@ -23,10 +24,6 @@ function login() {
                 hiddenContent.classList.add('shown');
             }, 50); // Timeout for browser to recognize the display block change
         }, 2000);
-        // Force a reflow (flush of the CSS cache),
-        // necessary for the transition to work
-        hiddenContent.getBoundingClientRect();
-        hiddenContent.classList.add('visible');
     } else {
         let currentTimeMillis = Date.now().toString();
         let key = encrypt(currentTimeMillis.substring(0, 6));

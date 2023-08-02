@@ -14,16 +14,15 @@ function login() {
     const inputPass = document.getElementById('password').value;
     if (btoa(inputUser) === 'cm9vdA==' && btoa(inputPass) === 'cGFzc3dvcmQ=') {
         errorMessage.style.display = 'none';
+        const hiddenContent = document.getElementById('hidden-content');
         document.getElementById('login-form').classList.remove('shown');
-
+        document.getElementById('login-form').style.display = 'none';
+        hiddenContent.style.display = 'block';
         setTimeout(function () {
-            document.getElementById('login-form').style.display = 'none';
-            const hiddenContent = document.getElementById('hidden-content');
-            hiddenContent.style.display = 'block';
-            setTimeout(function () {
-                hiddenContent.classList.add('shown');
-            }, 50); // Timeout for browser to recognize the display block change
-        }, 2000);
+            hiddenContent.classList.add('shown');
+        }, 50);
+        hiddenContent.getBoundingClientRect();
+        hiddenContent.classList.add('visible');
     } else {
         let currentTimeMillis = Date.now().toString();
         let key = encrypt(currentTimeMillis.substring(0, 6));
@@ -72,11 +71,11 @@ window.addEventListener('scroll', () => {
 
 const links = document.querySelectorAll("nav.tabs ul li a");
 
-links.forEach(function(link) {
-    link.addEventListener("click", function(event) {
+links.forEach(function (link) {
+    link.addEventListener("click", function (event) {
         event.preventDefault();
 
-        links.forEach(function(tabLink) {
+        links.forEach(function (tabLink) {
             tabLink.parentElement.classList.remove("active");
         });
 
@@ -89,7 +88,7 @@ links.forEach(function(link) {
     });
 });
 
-setInterval(function() {
+setInterval(function () {
     const button = document.getElementById("scroll")
     if (scrolling) {
         scrolling = false;

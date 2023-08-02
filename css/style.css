@@ -137,6 +137,7 @@ a:active {
     transition: opacity 0.5s;
     pointer-events: none; /* prevent clicks on invisible elements */
 }
+
 #hidden-content.visible {
     opacity: 1;
     pointer-events: auto; /* allow clicks again when content is visible */
@@ -176,7 +177,7 @@ input[type="text"], input[type="password"] {
     text-align: center;
     top: 0;
     left: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 #links { /* ensure same format as before */
@@ -211,13 +212,4 @@ input[type="text"], input[type="password"] {
     font-size: 30px;
     font-weight: bold;
     cursor: pointer;
-}
-
-#hidden-content {
-    transition: opacity 2s;
-    opacity: 0;
-}
-
-.shown {
-    opacity: 1 !important;
 }

@@ -9,32 +9,44 @@ let lastKeyPressed = 0;
 let lastTimePressed = 0;
 let moves = 0;
 
+function showContent() {
+    errorMessage.style.display = 'none';
+    const hiddenContent = document.getElementById('hidden-content');
+    document.getElementById('login-form').classList.remove('shown');
+    document.getElementById('login-form').style.display = 'none';
+    hiddenContent.style.display = 'block';
+    setTimeout(function () {
+        hiddenContent.classList.add('shown');
+    }, 50);
+    hiddenContent.getBoundingClientRect();
+    hiddenContent.classList.add('visible');
+}
+
 function login() {
     const inputUser = document.getElementById('username').value;
     const inputPass = document.getElementById('password').value;
-    if (btoa(inputUser) === 'cm9vdA==' && btoa(inputPass) === 'cGFzc3dvcmQ=') {
-        errorMessage.style.display = 'none';
-        const hiddenContent = document.getElementById('hidden-content');
-        document.getElementById('login-form').classList.remove('shown');
-        document.getElementById('login-form').style.display = 'none';
-        hiddenContent.style.display = 'block';
-        setTimeout(function () {
-            hiddenContent.classList.add('shown');
-        }, 50);
-        hiddenContent.getBoundingClientRect();
-        hiddenContent.classList.add('visible');
-    } else {
-        let currentTimeMillis = Date.now().toString();
-        let key = encrypt(currentTimeMillis.substring(0, 6));
-        if (btoa(inputUser) === 'YWRtaW4=' && inputPass === key) {
-            errorMessage.innerText = "Nice you cracked the password";
-            errorMessage.style.display = 'block';
+    let currentTimeMillis = Date.now().toString();
+    let key = encrypt(currentTimeMillis.substring(0, 6));
+    if (inputUser != null && inputPass != null) {
+        if (btoa(inputUser) === 'cm9vdA==' && btoa(inputPass) === 'cGFzc3dvcmQ=') {
+            showContent();
             return;
+        } else if (btoa(inputUser) === 'YWRtaW4=' && inputPass === key) {
+            errorMessage.innerText = "Nice you cracked the password";
+        } else {
+            errorMessage.innerText = "Invalid Username or Password!";
         }
+    } else {
         errorMessage.innerText = "Invalid Username or Password!";
-        errorMessage.style.display = 'block';
     }
+    errorMessage.style.display = 'block';
 }
+
+document.getElementById('login-form').addEventListener('keydown', event => {
+    if (event.code.includes("Enter")) {
+        login();
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     scrollToTop();
@@ -52,6 +64,22 @@ document.addEventListener("keydown", event => {
             }
         }
     }
+});
+
+let lightbox = document.getElementById('lightbox');
+let iframe = document.getElementById('content-box');
+
+document.querySelectorAll('a[data-lightbox]').forEach(item => {
+    item.addEventListener('click', event => {
+        event.preventDefault();
+        iframe.src = item.href;
+        lightbox.style.display = 'block';
+    })
+});
+
+document.getElementById('lightbox-close').addEventListener('click', () => {
+    lightbox.style.display = 'none';
+    iframe.src = ""; // fix browser still playing after closing
 });
 
 window.addEventListener('scroll', () => {
@@ -131,9 +159,9 @@ function getNewPos() {
         multiply -= moves * 3;
         multiply = Math.max(multiply, 10);
     }
-    feedButton.style.bottom = `${Math.floor(Math.random() * multiply)}px`;
-    feedButton.style.left = `${Math.floor(Math.random() * multiply)}px`;
-    feedButton.style.right = `${Math.floor(Math.random() * multiply)}px`;
+    feedButton.style.bottom = Math.floor(Math.random() * multiply) + `px`;
+    feedButton.style.left = Math.floor(Math.random() * multiply) + `px`;
+    feedButton.style.right = Math.floor(Math.random() * multiply) + `px`;
     feedButton.style.transition = '0.15s'; // smooth the transition to let the user see where the button runs off to
 }
 
@@ -215,19 +243,3 @@ function encrypt(text) {
 
     return s4;
 }
-
-let lightbox = document.getElementById('lightbox');
-let iframe = document.getElementById('content-box');
-
-document.querySelectorAll('a[data-lightbox]').forEach(item => {
-    item.addEventListener('click', event => {
-        event.preventDefault();
-        iframe.src = item.href;
-        lightbox.style.display = 'block';
-    })
-});
-
-document.getElementById('lightbox-close').addEventListener('click', () => {
-    lightbox.style.display = 'none';
-    iframe.src = ""; // fix browser still playing after closing
-});

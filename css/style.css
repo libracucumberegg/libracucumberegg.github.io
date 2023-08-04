@@ -133,6 +133,7 @@ a:active {
 }
 
 #hidden-content {
+    display: none;
     opacity: 0;
     transition: opacity 0.5s;
     pointer-events: none; /* prevent clicks on invisible elements */
@@ -153,7 +154,7 @@ input[type="text"], input[type="password"] {
     border-radius: 4px;
 }
 
-#loginButton {
+#loginButton, #skipButton {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -164,8 +165,17 @@ input[type="text"], input[type="password"] {
     border-radius: 4px;
 }
 
-#loginButton:hover {
+#loginButton:hover, #skipButton:hover {
     opacity: 0.8;
+}
+
+#skipButton {
+    margin-top: 10em; /* separate guest button */
+}
+
+#error {
+    display: none;
+    color: red;
 }
 
 #lightbox {
@@ -212,4 +222,9 @@ input[type="text"], input[type="password"] {
     font-size: 30px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#feed {
+    left: 300px;
+    z-index: 99;
 }

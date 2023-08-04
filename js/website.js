@@ -116,6 +116,24 @@ links.forEach(function (link) {
     });
 });
 
+document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const offset = -60; // The offset from the target element
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const targetElementRect = targetElement.getBoundingClientRect().top;
+        const targetPosition = targetElementRect - bodyRect;
+        const offsetPosition = targetPosition + offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    });
+});
+
 setInterval(function () {
     const button = document.getElementById("scroll")
     if (scrolling) {
